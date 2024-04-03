@@ -1,4 +1,4 @@
-package com.example.tcc_deficiencia
+package com.tcc.deficiencia
 
 import io.flutter.embedding.android.FlutterActivity
 
