@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'TCC',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
-          useMaterial3: true,
-        ),
-        debugShowCheckedModeBanner: false,
-        home: const YoloVideo());
+      title: 'TCC',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
+        useMaterial3: true,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: const YoloVideo(),
+    );
   }
 }
 
@@ -43,6 +45,8 @@ class _YoloVideoState extends State<YoloVideo> {
 
   late FlutterVision vision;
   FlutterTts flutterTts = FlutterTts();
+  Queue<String> speechQueue = Queue<String>();
+  bool isSpeaking = false;
 
   @override
   void initState() {
@@ -59,16 +63,32 @@ class _YoloVideoState extends State<YoloVideo> {
     await flutterTts.setSpeechRate(1.0);
     await flutterTts.setVolume(1.0);
     await flutterTts.setPitch(1.0);
+    flutterTts.setStartHandler(() {
+      isSpeaking = true;
+    });
+    flutterTts.setCompletionHandler(() {
+      isSpeaking = false;
+      if (speechQueue.isNotEmpty) {
+        speak(speechQueue.removeFirst());
+      }
+    });
   }
 
   Future<void> speak(String text) async {
-    await flutterTts.speak(text);
+    if (isSpeaking) {
+      speechQueue.add(text);
+    } else {
+      await flutterTts.speak(text);
+    }
   }
 
   init() async {
     cameras = await availableCameras();
-    controller =
-        CameraController(cameras[0], ResolutionPreset.max, enableAudio: false);
+    controller = CameraController(
+      cameras[0],
+      ResolutionPreset.max,
+      enableAudio: false,
+    );
     controller.initialize().then((value) {
       loadYoloModel().then((value) {
         setState(() {
@@ -96,8 +116,10 @@ class _YoloVideoState extends State<YoloVideo> {
       return const Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
-          child: Text("Carregando aplicativo. Aguarde um momento.",
-              style: TextStyle(color: Colors.white)),
+          child: Text(
+            "Carregando aplicativo. Aguarde um momento.",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       );
     }
@@ -120,7 +142,10 @@ class _YoloVideoState extends State<YoloVideo> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                  width: 5, color: Colors.white, style: BorderStyle.solid),
+                width: 5,
+                color: Colors.white,
+                style: BorderStyle.solid,
+              ),
             ),
             child: isDetecting
                 ? IconButton(
@@ -151,11 +176,12 @@ class _YoloVideoState extends State<YoloVideo> {
 
   Future<void> loadYoloModel() async {
     await vision.loadYoloModel(
-        labels: 'assets/labels.txt',
-        modelPath: 'assets/model.tflite',
-        modelVersion: "yolov8",
-        numThreads: 8,
-        useGpu: true);
+      labels: 'assets/labels.txt',
+      modelPath: 'assets/model.tflite',
+      modelVersion: "yolov8",
+      numThreads: 8,
+      useGpu: true,
+    );
     setState(() {
       isLoaded = true;
     });
@@ -163,12 +189,13 @@ class _YoloVideoState extends State<YoloVideo> {
 
   Future<void> yoloOnFrame(CameraImage cameraImage) async {
     final result = await vision.yoloOnFrame(
-        bytesList: cameraImage.planes.map((plane) => plane.bytes).toList(),
-        imageHeight: cameraImage.height,
-        imageWidth: cameraImage.width,
-        iouThreshold: 0.4,
-        confThreshold: 0.4,
-        classThreshold: 0.5);
+      bytesList: cameraImage.planes.map((plane) => plane.bytes).toList(),
+      imageHeight: cameraImage.height,
+      imageWidth: cameraImage.width,
+      iouThreshold: 0.4,
+      confThreshold: 0.4,
+      classThreshold: 0.5,
+    );
     if (result.isNotEmpty) {
       setState(() {
         yoloResults = result;
