@@ -12,17 +12,19 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   flutter_vision: ^1.1.4
-  camera: ^0.10.5+5
+  camera: ^0.11.0
   permission_handler: ^11.3.1
   flutter_tts: ^4.0.2
   flutter_launcher_icons: ^0.13.1
   change_app_package_name: ^1.1.0
+  smooth_page_indicator: ^1.1.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.1
+  flutter_lints: ^4.0.0
 
 flutter_launcher_icons:
   image_path: "assets/icon/ic_launcher.png"
