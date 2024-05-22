@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter_vision/flutter_vision.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tcc_deficiencia/settings.dart';
 
 late List<CameraDescription> cameras;
 
@@ -108,6 +109,7 @@ class _YoloVideoState extends State<YoloVideo> {
           isDetecting = false;
           yoloResults = [];
         });
+        startDetection();
       });
     });
   }
@@ -148,38 +150,71 @@ class _YoloVideoState extends State<YoloVideo> {
         Positioned(
           bottom: 75,
           width: MediaQuery.of(context).size.width,
-          child: Container(
-            height: 80,
-            width: 80,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                width: 5,
-                color: Colors.white,
-                style: BorderStyle.solid,
-              ),
-            ),
-            child: isDetecting
-                ? IconButton(
-                    onPressed: () async {
-                      stopDetection();
-                    },
-                    icon: const Icon(
-                      Icons.stop,
-                      color: Colors.red,
-                    ),
-                    iconSize: 50,
-                  )
-                : IconButton(
-                    onPressed: () async {
-                      await startDetection();
-                    },
-                    icon: const Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                    ),
-                    iconSize: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 80,
+                width: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    width: 5,
+                    color: Colors.white,
+                    style: BorderStyle.solid,
                   ),
+                ),
+                child: isDetecting
+                    ? IconButton(
+                        onPressed: () async {
+                          stopDetection();
+                        },
+                        icon: const Icon(
+                          Icons.stop,
+                          color: Colors.red,
+                        ),
+                        iconSize: 50,
+                      )
+                    : IconButton(
+                        onPressed: () async {
+                          await startDetection();
+                        },
+                        icon: const Icon(
+                          Icons.play_arrow,
+                          color: Colors.white,
+                        ),
+                        iconSize: 50,
+                      ),
+              ),
+              const SizedBox(width: 20),
+              Container(
+                height: 80,
+                width: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    width: 5,
+                    color: Colors.white,
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TTSConfigScreen(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                  ),
+                  iconSize: 50,
+                ),
+              ),
+            ],
           ),
         ),
       ],
