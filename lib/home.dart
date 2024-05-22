@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter_vision/flutter_vision.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 late List<CameraDescription> cameras;
 
@@ -48,6 +49,10 @@ class _YoloVideoState extends State<YoloVideo> {
   Queue<String> speechQueue = Queue<String>();
   bool isSpeaking = false;
 
+  double _speechRate = 1.0;
+  double _volume = 1.0;
+  double _pitch = 1.0;
+
   @override
   void initState() {
     super.initState();
@@ -59,10 +64,17 @@ class _YoloVideoState extends State<YoloVideo> {
   }
 
   Future<void> initTTS() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _speechRate = prefs.getDouble('speechRate') ?? 1.0;
+      _volume = prefs.getDouble('volume') ?? 1.0;
+      _pitch = prefs.getDouble('pitch') ?? 1.0;
+    });
+
     await flutterTts.setLanguage("pt-BR");
-    await flutterTts.setSpeechRate(1.0);
-    await flutterTts.setVolume(1.0);
-    await flutterTts.setPitch(1.0);
+    await flutterTts.setSpeechRate(_speechRate);
+    await flutterTts.setVolume(_volume);
+    await flutterTts.setPitch(_pitch);
     flutterTts.setStartHandler(() {
       isSpeaking = true;
     });

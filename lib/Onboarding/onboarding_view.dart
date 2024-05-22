@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tcc_deficiencia/Components/color.dart';
 import 'package:tcc_deficiencia/Onboarding/onboarding_items.dart';
-import 'package:tcc_deficiencia/home.dart';
+import 'package:tcc_deficiencia/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -93,8 +93,8 @@ class _OnboardingViewState extends State<OnboardingView> {
             pres.setBool("onboarding", true);
 
             if (!mounted) return;
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => Home()));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => TTSConfigScreen()));
           },
           child: const Text(
             "Iniciar",
