@@ -78,88 +78,133 @@ class _TTSConfigScreenState extends State<TTSConfigScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Configurações do Texto-para-Fala'),
+        centerTitle: true,
+        excludeHeaderSemantics: true,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Configurações do Texto-para-Fala',
+          style: TextStyle(fontSize: 20),
+        ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Ajuste as configurações que te deixam mais confortável ao ouvir o texto-para-fala.',
-              style: TextStyle(fontSize: 18),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Text(
+                'Ajuste as configurações que te deixam mais confortável ao ouvir o texto-para-fala.',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.left,
+              ),
             ),
-          ),
-          ListTile(
-            title: Text('Velocidade de fala'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  onPressed: () => _decrementValue('speechRate'),
-                ),
-                Text(_speechRate.toStringAsFixed(1)),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () => _incrementValue('speechRate'),
-                ),
-              ],
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 24),
+              title: Text(
+                'Velocidade de fala',
+                style: TextStyle(fontSize: 18),
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    onPressed: () => _decrementValue('speechRate'),
+                    tooltip: 'Diminuir velocidade de fala',
+                  ),
+                  Text(
+                    _speechRate.toStringAsFixed(1),
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: () => _incrementValue('speechRate'),
+                    tooltip: 'Aumentar velocidade de fala',
+                  ),
+                ],
+              ),
             ),
-          ),
-          ListTile(
-            title: Text('Volume de voz'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  onPressed: () => _decrementValue('volume'),
-                ),
-                Text(_volume.toStringAsFixed(1)),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () => _incrementValue('volume'),
-                ),
-              ],
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 24),
+              title: Text(
+                'Volume de voz',
+                style: TextStyle(fontSize: 18),
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    onPressed: () => _decrementValue('volume'),
+                    tooltip: 'Diminuir volume de voz',
+                  ),
+                  Text(
+                    _volume.toStringAsFixed(1),
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: () => _incrementValue('volume'),
+                    tooltip: 'Aumentar volume de voz',
+                  ),
+                ],
+              ),
             ),
-          ),
-          ListTile(
-            title: Text('Tom de voz'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  onPressed: () => _decrementValue('pitch'),
-                ),
-                Text(_pitch.toStringAsFixed(1)),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () => _incrementValue('pitch'),
-                ),
-              ],
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 24),
+              title: Text(
+                'Tom de voz',
+                style: TextStyle(fontSize: 18),
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    onPressed: () => _decrementValue('pitch'),
+                    tooltip: 'Diminuir tom de voz',
+                  ),
+                  Text(
+                    _pitch.toStringAsFixed(1),
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: () => _incrementValue('pitch'),
+                    tooltip: 'Aumentar tom de voz',
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8), color: primaryColor),
-            width: MediaQuery.of(context).size.width * .9,
-            height: 55,
-            child: TextButton(
-                onPressed: () async {
-                  final pres = await SharedPreferences.getInstance();
-                  pres.setBool("onboarding", true);
+            Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: primaryColor,
+                  ),
+                  width: MediaQuery.of(context).size.width * .9,
+                  height: 55,
+                  child: TextButton(
+                    onPressed: () async {
+                      final pres = await SharedPreferences.getInstance();
+                      pres.setBool("onboarding", true);
 
-                  if (!mounted) return;
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => Home()));
-                },
-                child: const Text(
-                  "Finalizar",
-                  style: TextStyle(color: Colors.white),
+                      if (!mounted) return;
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => Home()),
+                      );
+                    },
+                    child: const Text(
+                      "Finalizar",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
                 )),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

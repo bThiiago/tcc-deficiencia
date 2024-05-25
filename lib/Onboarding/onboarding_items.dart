@@ -5,7 +5,7 @@ class OnboardingItems {
     OnboardingInfo(
         title: "Bem-vindo ao Visão Acessível",
         descriptions:
-            "Um aplicativo desenvolvido para o Trabalho de Conclusão de Curso no Instituto Federal de São Paulo - Campus Presidente Epitacio, que utiliza inteligência artificial para auxiliar pessoas com deficiência visual a navegar com segurança."),
+            "Um aplicativo desenvolvido para o Trabalho de Conclusão de Curso no Instituto Federal de São Paulo - Campus Presidente Epitacio, que utiliza inteligência artificial para auxiliar pessoas com deficiência visual a navegar com segurança. Para continuar arraste a tela ou clique no botão na parte inferior."),
     OnboardingInfo(
         title: "Pisos Táteis",
         descriptions:

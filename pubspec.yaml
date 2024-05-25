@@ -1,7 +1,7 @@
 name: tcc_deficiencia
 description: TCC Flutter project.
 publish_to: "none"
-version: 1.0.1+1
+version: 1.0.2
 
 environment:
   sdk: ">=3.1.5 <4.0.0"

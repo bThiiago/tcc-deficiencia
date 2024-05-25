@@ -99,7 +99,7 @@ class _YoloVideoState extends State<YoloVideo> {
     cameras = await availableCameras();
     controller = CameraController(
       cameras[0],
-      ResolutionPreset.max,
+      ResolutionPreset.veryHigh,
       enableAudio: false,
     );
     controller.initialize().then((value) {
@@ -166,6 +166,7 @@ class _YoloVideoState extends State<YoloVideo> {
                 ),
                 child: isDetecting
                     ? IconButton(
+                        tooltip: 'Parar detecção',
                         onPressed: () async {
                           stopDetection();
                         },
@@ -176,6 +177,7 @@ class _YoloVideoState extends State<YoloVideo> {
                         iconSize: 50,
                       )
                     : IconButton(
+                        tooltip: 'Iniciar detecção',
                         onPressed: () async {
                           await startDetection();
                         },
@@ -199,6 +201,7 @@ class _YoloVideoState extends State<YoloVideo> {
                   ),
                 ),
                 child: IconButton(
+                  tooltip: 'Configurações',
                   onPressed: () {
                     Navigator.push(
                       context,
