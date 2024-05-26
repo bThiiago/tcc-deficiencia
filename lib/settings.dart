@@ -56,7 +56,7 @@ class _TTSConfigScreenState extends State<TTSConfigScreen> {
         _pitch += 0.1;
       }
     });
-    flutterTts.speak('Testando configurações');
+    flutterTts.speak('Exemplo de fala');
     _saveConfigurations();
   }
 
@@ -70,7 +70,7 @@ class _TTSConfigScreenState extends State<TTSConfigScreen> {
         _pitch -= 0.1;
       }
     });
-    flutterTts.speak('Testando configurações');
+    flutterTts.speak('Exemplo de fala');
     _saveConfigurations();
   }
 
@@ -86,7 +86,7 @@ class _TTSConfigScreenState extends State<TTSConfigScreen> {
           style: TextStyle(fontSize: 20),
         ),
       ),
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,

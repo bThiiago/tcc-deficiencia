@@ -5,7 +5,7 @@ class OnboardingItems {
     OnboardingInfo(
         title: "Bem-vindo ao Visão Acessível",
         descriptions:
-            "Um aplicativo desenvolvido para o Trabalho de Conclusão de Curso no Instituto Federal de São Paulo - Campus Presidente Epitacio, que utiliza inteligência artificial para auxiliar pessoas com deficiência visual a navegar com segurança. Para continuar arraste a tela ou clique no botão na parte inferior."),
+            "Um aplicativo desenvolvido para o Trabalho de Conclusão de Curso no Instituto Federal de São Paulo - Campus Presidente Epitacio, que utiliza inteligência artificial para auxiliar pessoas com deficiência visual a navegar com segurança. Para continuar clique na tela, arraste a tela ou clique no botão na parte inferior."),
     OnboardingInfo(
         title: "Pisos Táteis",
         descriptions:
@@ -21,10 +21,10 @@ class OnboardingItems {
     OnboardingInfo(
         title: "Configurações",
         descriptions:
-            "No centro inferior existem dois botões. O botão da esquerda permite parar ou iniciar o reconhecimento, sendo que por padrão ele inicia o reconhecimento. O botão da direita abre a tela de configurações, onde é possível ajustar as preferências de leitura do texto-para-fala para uma experiência mais confortável."),
+            "No centro inferior existem dois botões. O botão da esquerda permite parar ou iniciar o reconhecimento, onde por padrão se inicia reconhecendo. O botão da direita abre a tela de configurações, onde é possível ajustar as preferências de leitura do texto-para-fala para uma experiência mais confortável."),
     OnboardingInfo(
         title: "Utilização",
         descriptions:
-            "Para utilizar o aplicativo, aponte a câmera para o piso tátil ou faixa de pedestres e aguarde a descrição do item reconhecido."),
+            "Para utilizar o aplicativo, aponte a câmera para o piso tátil ou faixa de pedestres e aguarde a descrição do item reconhecido. Clique no botão inferior para inciar o aplicativo."),
   ];
 }

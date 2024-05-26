@@ -99,7 +99,7 @@ class _YoloVideoState extends State<YoloVideo> {
     cameras = await availableCameras();
     controller = CameraController(
       cameras[0],
-      ResolutionPreset.veryHigh,
+      ResolutionPreset.high,
       enableAudio: false,
     );
     controller.initialize().then((value) {
@@ -166,6 +166,7 @@ class _YoloVideoState extends State<YoloVideo> {
                 ),
                 child: isDetecting
                     ? IconButton(
+                        enableFeedback: true,
                         tooltip: 'Parar detecção',
                         onPressed: () async {
                           stopDetection();
@@ -177,6 +178,7 @@ class _YoloVideoState extends State<YoloVideo> {
                         iconSize: 50,
                       )
                     : IconButton(
+                        enableFeedback: true,
                         tooltip: 'Iniciar detecção',
                         onPressed: () async {
                           await startDetection();
@@ -201,6 +203,7 @@ class _YoloVideoState extends State<YoloVideo> {
                   ),
                 ),
                 child: IconButton(
+                  enableFeedback: true,
                   tooltip: 'Configurações',
                   onPressed: () {
                     Navigator.push(
@@ -280,8 +283,6 @@ class _YoloVideoState extends State<YoloVideo> {
     double factorX = screen.width / (cameraImage?.height ?? 1);
     double factorY = screen.height / (cameraImage?.width ?? 1);
 
-    Color colorPick = const Color.fromARGB(255, 50, 233, 30);
-
     return yoloResults.map((result) {
       String tag = result['tag'];
       if (tag == '2') {
@@ -307,14 +308,6 @@ class _YoloVideoState extends State<YoloVideo> {
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(10.0)),
             border: Border.all(color: Colors.pink, width: 2.0),
-          ),
-          child: Text(
-            "${result['tag']} ${(result['box'][4] * 100).toStringAsFixed(0)}%",
-            style: TextStyle(
-              background: Paint()..color = colorPick,
-              color: Colors.white,
-              fontSize: 18.0,
-            ),
           ),
         ),
       );
