@@ -278,39 +278,67 @@ class _YoloVideoState extends State<YoloVideo> {
     });
   }
 
+  Map<String, int> tagCounter = {};
+
   List<Widget> displayBoxesAroundRecognizedObjects(Size screen) {
     if (yoloResults.isEmpty) return [];
     double factorX = screen.width / (cameraImage?.height ?? 1);
     double factorY = screen.height / (cameraImage?.width ?? 1);
 
-    return yoloResults.map((result) {
+    List<Widget> boxes = [];
+
+    for (var result in yoloResults) {
       String tag = result['tag'];
-      if (tag == '2') {
-        speak("Atenção: Piso tátil Dois");
-      } else if (tag == '3') {
-        speak("Atenção: Piso tátil Três");
-      } else if (tag == '4') {
-        speak("Atenção: Piso tátil Quatro");
-      } else if (tag == 'crosswalk') {
-        speak("Faixa de pedestres");
-      } else if (tag == 'go') {
-        speak("Piso tátil: Siga em frente");
-      } else if (tag == 'stop') {
-        speak("Piso tátil: Pare");
+      if (!tagCounter.containsKey(tag)) {
+        tagCounter[tag] = 0;
       }
 
-      return Positioned(
-        left: result["box"][0] * factorX,
-        top: result["box"][1] * factorY,
-        width: (result["box"][2] - result["box"][0]) * factorX,
-        height: (result["box"][3] - result["box"][1]) * factorY,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-            border: Border.all(color: Colors.pink, width: 2.0),
+      if (tagCounter[tag] == 0) {
+        speak(getSpeakMessage(tag));
+      }
+
+      tagCounter[tag] = (tagCounter[tag] ?? 0) + 1;
+
+      if (tagCounter[tag] == 7) {
+        speak(getSpeakMessage(tag));
+        tagCounter[tag] = 0;
+      }
+
+      boxes.add(
+        Positioned(
+          left: result["box"][0] * factorX,
+          top: result["box"][1] * factorY,
+          width: (result["box"][2] - result["box"][0]) * factorX,
+          height: (result["box"][3] - result["box"][1]) * factorY,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              border: Border.all(color: Colors.pink, width: 2.0),
+            ),
           ),
         ),
       );
-    }).toList();
+    }
+
+    return boxes.toList();
+  }
+
+  String getSpeakMessage(String tag) {
+    switch (tag) {
+      case '2':
+        return "Atenção: Piso tátil Dois";
+      case '3':
+        return "Atenção: Piso tátil Três";
+      case '4':
+        return "Atenção: Piso tátil Quatro";
+      case 'crosswalk':
+        return "Faixa de pedestres";
+      case 'go':
+        return "Piso tátil: Siga em frente";
+      case 'stop':
+        return "Piso tátil: Pare";
+      default:
+        return "";
+    }
   }
 }
