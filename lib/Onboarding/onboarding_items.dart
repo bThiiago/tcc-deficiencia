@@ -5,15 +5,11 @@ class OnboardingItems {
     OnboardingInfo(
         title: "Bem-vindo ao Visão Acessível",
         descriptions:
-            "Um aplicativo desenvolvido para o Trabalho de Conclusão de Curso no Instituto Federal de São Paulo - Campus Presidente Epitacio, que utiliza inteligência artificial para auxiliar pessoas com deficiência visual a navegar com segurança. Para continuar clique na tela, arraste a tela ou clique no botão na parte inferior."),
+            "Um aplicativo desenvolvido para auxiliar pessoas com deficiência visual a navegar com segurança. Clique na tela, arraste a tela ou clique no botão na parte inferior para continuar."),
     OnboardingInfo(
-        title: "Pisos Táteis",
+        title: "Detecção",
         descriptions:
-            "O aplicativo pode reconhecer e descrever pisos táteis, auxiliando pessoas com deficiência visual a navegar com segurança."),
-    OnboardingInfo(
-        title: "Faixas de Pedestre",
-        descriptions:
-            "Alem disso pode reconhecer e descrever faixas de pedestres para trazer uma direção mais segura ao atravessar a rua."),
+            "O aplicativo pode reconhecer e descrever pisos táteis e faixa de pedestres, auxiliando pessoas com deficiência visual a navegar com segurança."),
     OnboardingInfo(
         title: "Interface Auditiva",
         descriptions:
@@ -25,6 +21,6 @@ class OnboardingItems {
     OnboardingInfo(
         title: "Utilização",
         descriptions:
-            "Para utilizar o aplicativo, aponte a câmera para o piso tátil ou faixa de pedestres e aguarde a descrição do item reconhecido. Clique no botão inferior para inciar o aplicativo."),
+            "Para utilizar o aplicativo, aponte a câmera para o piso tátil ou faixa de pedestres e aguarde a descrição do item reconhecido. Clique no botão inferior para iniciar o aplicativo."),
   ];
 }
