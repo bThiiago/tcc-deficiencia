@@ -1,39 +1,3 @@
-# Descrição Audiovisual Inteligente para Acessibilidade de Pessoas com Deficiência Visual
-
-Um aplicativo Flutter usando o algoritmo You Only Look Once (YOLO) para melhorar a acessibilidade de pessoas com deficiências visuais.
-
-## Geral
-
-Este projeto tem como objetivo desenvolver uma solução audiovisual inteligente para melhorar a acessibilidade de pessoas com deficiências visuais no Brasil. Ao aproveitar o poder do YOLO, um algoritmo de detecção de objetos, o aplicativo Flutter pode identificar e descrever objetos em tempo real usando a câmera do dispositivo. O aplicativo fornece feedback de áudio aos usuários, permitindo que eles naveguem em seu ambiente de forma mais eficaz e independente.
-
-## Principais recursos
-
-- Detecção de objetos em tempo real: O algoritmo YOLO é usado para detectar objetos no feed da câmera, fornecendo feedback instantâneo ao usuário.
-- Descrição de áudio: O aplicativo gera descrições de áudio dos objetos detectados, permitindo que os usuários compreendam seu ambiente sem depender apenas de pistas visuais e físicas.
-- Configurações personalizáveis: Os usuários podem personalizar o feedback de áudio com base em suas preferências, como a velocidade e o volume das descrições.
-- Interface amigável ao usuário: O framework Flutter garante uma experiência de usuário suave e intuitiva, tornando o aplicativo acessível a pessoas com diferentes níveis de conhecimento técnico.
-
-## Instalação
-
-Você pode encontrar o arquivo .apk deste aplicativo na seção de releases do GitHub. Basta fazer o download do arquivo correspondente à versão desejada e instalá-lo em seu dispositivo Android.
-
-## Contribuições
-
-Siga estas etapas para utilizar o código fonte:
-
-1. Clone o repositório em sua máquina local.
-2. Instale o Flutter e suas dependências.
-3. Conecte seu dispositivo ou configure um emulador.
-4. Execute o aplicativo usando as ferramentas de linha de comando do Flutter. Para mais informações, [entre em flutter.dev](https://flutter.dev).
-
-Contribuições para este projeto são bem-vindas! Se você tiver alguma ideia ou melhoria, sinta-se à vontade para enviar uma solicitação de pull ou abrir uma issue no repositório do GitHub.
-
-## Licença
-
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](./LICENSE) para obter mais detalhes.
-
----
-
 # Intelligent Audiovisual Description for Accessibility of Visually Impaired People
 
 A Flutter application using the You Only Look Once (YOLO) algorithm to improve the accessibility of visually impaired people.
